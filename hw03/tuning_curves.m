@@ -5,12 +5,12 @@ data = load('orientation_tuning_data.mat');
 
 Vm = data.Vm;
 
-% %part a
-% figure;
-% plot(linspace(1,10,10000), Vm(1:10000));
-% title('First 10 Seconds of Vm Trace');
-% xlabel('Time (s)');
-% ylabel('Vm (mV)')
+%part a
+figure;
+plot(linspace(1,10,10000), Vm(1:10000));
+title('First 10 Seconds of Vm Trace');
+xlabel('Time (s)');
+ylabel('Vm (mV)')
 
 
 %part b
@@ -62,7 +62,7 @@ theta = 0:22.5:337.5;
 
 subplot(2,1,1);
 plot(theta, spikeCounts, 'r');
-
+xlim([0, 350])
 
 ylabel('Firing Rate (sp/s)');
 title('Orientation Tuning Curve');
@@ -70,6 +70,7 @@ title('Orientation Tuning Curve');
 subplot(2,1,2);
 
 plot(theta, spikeCounts, 'r.');
+xlim([0, 350])
 hold on;
 %Extra credit curve fitting
 
