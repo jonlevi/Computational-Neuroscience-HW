@@ -53,6 +53,7 @@ for cell = 1:numCells
         aucs(cell,c) = a;
         hold all;
     end
+    
 
     plot(0:.1:1, 0:.1:1, 'k--')
     labels = cellstr(strcat(num2str(coherences), ' % Coherence'));
@@ -68,17 +69,22 @@ for cell = 1:numCells
 end
 
 figure;
-for cell = 1:numCells
+for cell = 1:numCells 
     subplot(3,2,cell)
     areas = aucs(cell, :);
-    semilogx(coherences/100, areas)
+    
     hold on;
     [x_s,y_s] = weibull_fit(coherences/100, areas);
     semilogx(x_s,y_s, 'r--')
     
-    if(cell==5)
-        legend('data', 'Weibull Function')
-    end
+    neuron = cellArrayOfCells{cell,2};
+    [~, pct_correct] = getPsychometric(neuron);
+    [x_s2,y_s2] = weibull_fit(coherences/100, pct_correct);
+    
+    semilogx(x_s2,y_s2, 'b--')
+    semilogx(coherences/100, pct_correct, 'bo')
+    semilogx(coherences/100, areas, 'ro')
+    legend('Neuronal Data', 'Behavioral Data')
 
     if (cell==5 || cell==4)
         xlabel('Coherence Fraction')
@@ -86,7 +92,7 @@ for cell = 1:numCells
         set(gca,'xticklabel',[])
     end
     ylabel('Fraction Correct (AUC)')
-    title(strcat('Neurometric Function for Cell # ', num2str(cell)))
+    title(strcat('Random Dot Motion Discrimination for Cell # ', num2str(cell)))
     
 end
 
