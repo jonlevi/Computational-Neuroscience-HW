@@ -6,15 +6,22 @@ numCells = size(cellArrayOfCells,1);
 %part 1
 
 figure;
+index = 1;
 
 for cell = 1:numCells
-    subplot(5,2,2*(cell-1)+1)
+    subplot(5,3,index)
+    index = index + 1;
     neuron = cellArrayOfCells{cell,1};
     [directions, rates] = getRates(neuron);
+    
+    %dummy used to initliazed coherences later
+    [~, coherences] = getRocInfo(neuron, 180, 0);
+    
     polar(directions, rates);
     title(strcat('Cell # ', num2str(cell)))
     
-    subplot(5,2,2*(cell-1)+2)
+    subplot(5,3,index+1)
+    index = index+1;
 
 
     [x_s,y_s] = mises_fit(directions, rates);
@@ -24,6 +31,12 @@ for cell = 1:numCells
     xlabel('Theta (degress)')
     ylabel('Firing Rate (Hz)')
     title(strcat('\Theta Preferred \approx ', num2str(round(preferred_dir)), '°'))
+    
+    subplot(5,3,index-1)
+    index = index+1;
+    polar(deg2rad(x_s),y_s)
+    
+    title(strcat('Von Mises Fit (Same as to the Right but Polar'))
 
     
     
