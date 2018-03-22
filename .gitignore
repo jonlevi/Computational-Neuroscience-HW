@@ -2,3 +2,9 @@ hw2.m~
 *.DS_Store
 *.DS_STORE
 *.m~
+*.cls
+*.tex
+*.gz
+*.out
+*.aux
+*.log
