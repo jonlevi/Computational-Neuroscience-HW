@@ -17,7 +17,7 @@ for cell = 1:numCells
     %dummy used to initliazed coherences later
     [~, coherences] = getRocInfo(neuron, 180, 0);
     
-    polar(directions, rates);
+    polar(deg2rad(directions), rates);
     title(strcat('Cell # ', num2str(cell)))
     
     subplot(5,3,index+1)
